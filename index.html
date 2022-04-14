@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color:#222222;
+            }
+
+            #board {
+                display: grid;
+                grid-template-columns: repeat(4, 100px);
+                grid-template-rows: repeat(4, 100px);
+                grid-row: 4;
+                grid-column: 4;
+                /* gap: 10px; */
+                text-align: center;
+                font-size: x-large;
+                font-family: monospace;
+
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+
+            .board-tile-border {
+                border: 2px solid lightgray;
+                border-left: 0px;
+                border-top: 0px;
+                border-radius: 3px;
+            }
+            
+            .board-tile {
+                color:white;
+                display: table-cell;
+                background-color: #222222;
+                padding: 15px;
+                display: grid;
+                vertical-align: middle;
+            }
+            
+            .board-tile:hover {
+                background-color:#2f2f2f;
+            }
+
+            .board-tile:active {
+                border: 5px solid lime;
+            }
+        </style>
+        <body>
+            <title>Wordy</title>
+            <div id="board"> </div>
+        </body>
+        <script type="text/javascript">
+            var Letters = new function() {
+                /**
+                 * @param {Number} lwr is inclusive
+                 * @param {Number} upr is exclusive
+                 */
+                this.randInt = function(lwr, upr) {
+                    return Math.floor(Math.random() * (upr - lwr)) + lwr;
+                }
+
+                this.randLetter = function() {
+                    return String.fromCharCode(this.randInt(65,91));
+                }
+
+                this.generateTile = function() {
+                    return
+                }
+            }
+
+            const board = document.getElementById("board");
+            // generate the board
+            board.innerHTML = '<div class="board-tile board-tile-border"></div>'.repeat(16);
+
+            const a = document.getElementsByClassName("board-tile");
+            for(let i = 0; i < a.length; i++) {
+                a[i].innerHTML = Letters.randLetter() + "<br>&#9679;";
+            }
+        </script>
+    </head>
+</html>

@@ -3,6 +3,7 @@
         <style>
             body {
                 background-color:#222222;
+                overflow: hidden;
             }
 
             #board {
@@ -46,7 +47,7 @@
                 background-color:#2f2f2f;
             }
 
-            .board-tile:active {
+            .board-tile:active, .board-tile-selected {
                 border: 5px solid lime;
             }
         </style>
@@ -71,6 +72,24 @@
                 this.generateTile = function() {
                     return
                 }
+
+                this.clicked = function(event) {
+                    const e = event.target;
+                    
+                    // toggle the tile's selected state
+                    if(e.classList.contains("board-tile-selected"))
+                        e.classList.remove("board-tile-selected");
+                    else
+                        e.classList.add("board-tile-selected");
+                }
+
+                /**
+                 * @param {HTMLElement} element board tile to inspect
+                 * @returns {Boolean} true if the element is currently selected
+                 */
+                this.isSelected = function(element) {
+                    return element.classList.contains("board-tile-selected");
+                }
             }
 
             const board = document.getElementById("board");
@@ -79,7 +98,8 @@
 
             const a = document.getElementsByClassName("board-tile");
             for(let i = 0; i < a.length; i++) {
-                a[i].innerHTML = Letters.randLetter() + "<br>&#9679;";
+                a[i].innerHTML = "<br>" + Letters.randLetter();
+                a[i].onclick = Letters.clicked;
             }
         </script>
     </head>
